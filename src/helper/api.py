@@ -5,11 +5,14 @@ from tool_box import user_authentication
 import instaapi as insta
 
 class FlaskAPIServer:
+    """
+    This class is used to create a Flask API server that can be used to upload content to Instagram.
+    """
 
     app = Flask(__name__)
     CORS(app, resources={r"/*": {"origins": "*"}})
 
-    token = ''
+    token = '' # TODO: Set a token with jwt
 
     def get_app(self):
         return self.app
@@ -18,6 +21,10 @@ class FlaskAPIServer:
     @cross_origin('*')
     @app.route('/instapush', methods=['POST'])
     def instapush():
+        """
+        This API endpoint is used to upload content to Instagram.
+        :return: Error message or success message.
+        """
         # Authentication
         auth_header = request.headers.get('Authorization')
         flag, error_message = user_authentication(auth_header, FlaskAPIServer.token)
