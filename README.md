@@ -21,7 +21,7 @@ python src/main.py
 
 ```bash
 curl -X POST http://127.0.0.1:58769/instapush \
-     -H "Authorization: Bearer <your-static-jwt-token>" \
+     -H "Authorization: Bearer <your-jwt-token>" \
      -F "username=<your-instagram-username>" \
      -F "password=<your-instagram-password>" \
      -F "type=photo" \
@@ -33,7 +33,7 @@ curl -X POST http://127.0.0.1:58769/instapush \
 
 ```bash
 curl -X POST http://127.0.0.1:58769/instapush \
-     -H "Authorization: Bearer <your-static-jwt-token>" \
+     -H "Authorization: Bearer <your-jwt-token>" \
      -F "username=<your-instagram-username>" \
      -F "password=<your-instagram-password>" \
      -F "type=video" \
