@@ -41,6 +41,9 @@ class FlaskAPIServer:
         file = data.get('file')
         thumbnail = data.get('thumbnail')
 
+        # TODO File must be stored local on the Server (or in Docker container)
+        # TODO Thumbnail must be stored local on the Server (or in Docker container)
+
         # Upload the content to Instagram
         if content_type == 'photo':
             response = insta.InstagramService(username, password).upload_photo(file, caption)
