@@ -15,9 +15,7 @@ pip install -r requirements.txt
 python src/main.py
 ```
 
-### 3. Testen der API
-
-Sie können die API mit einem Tool wie `curl`, Postman oder einem eigenen Client testen.
+### 3. Testen der API via Curl
 
 #### Beispiel für den Upload eines Fotos:
 
