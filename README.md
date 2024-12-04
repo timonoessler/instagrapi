@@ -1,7 +1,7 @@
 # instagrapi
 Service to upload content to Instagram using User name and password
 
-### 1. Venv erstellen
+### 1. Venv erstellen und aktivieren
 
 Danach requirements.txt installieren. <br>
 ```bash    
