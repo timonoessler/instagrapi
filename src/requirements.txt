@@ -1,0 +1,8 @@
+flask
+flask-cors
+instagrapi
+moviepy
+imageio[ffmpeg]
+numpy
+python-dotenv
+pyjwt

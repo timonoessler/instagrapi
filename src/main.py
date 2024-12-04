@@ -1,7 +1,10 @@
 import helper.api as api
+import jwt
 
 def main():
-    app = api.FlaskAPIServer().get_app()
+    server = api.FlaskAPIServer()
+    app = server.get_app()
+    print(f"JWT Token: {server.token}")
     return app
 
 if __name__ == '__main__':
