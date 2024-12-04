@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from helper.tool_box import user_authentication
 from helper.instaapi import InstagramService
 
+
 class FlaskAPIServer:
     """
     This class is used to create a Flask API server that can be used to upload content to Instagram.
@@ -26,10 +27,6 @@ class FlaskAPIServer:
         @self.app.route('/instapush', methods=['POST'])
         @cross_origin('*')
         def instapush():
-            """
-            This API endpoint is used to upload content to Instagram.
-            :return: Error message or success message.
-            """
             # Authentication
             auth_header = request.headers.get('Authorization')
             flag, error_message = user_authentication(auth_header, self.SECRET_KEY)
@@ -37,33 +34,31 @@ class FlaskAPIServer:
             if not flag:
                 return make_response({"error": error_message}, 401)
 
-            # Get the data from the form (multipart/form-data)
+            # Get the data from the request
             username = request.form.get('username')
             password = request.form.get('password')
             content_type = request.form.get('type')
             caption = request.form.get('caption')
 
-            # Retrieve files
             file = request.files.get('file')
             thumbnail = request.files.get('thumbnail')
 
             if not file:
                 return make_response({"error": "File is required"}, 400)
-            
-            if content_type == 'video' and not thumbnail:
-                return make_response({"error": "Thumbnail is required for video uploads"}, 400)
 
-            # Save the file locally
+            # Save files locally
             file_path = f"/tmp/{file.filename}"
             file.save(file_path)
 
             thumbnail_path = None
             if content_type == 'video':
+                if not thumbnail:
+                    return make_response({"error": "Thumbnail is required for video uploads"}, 400)
                 thumbnail_path = f"/tmp/{thumbnail.filename}"
                 thumbnail.save(thumbnail_path)
 
             try:
-                # Upload the content to Instagram
+                # Upload content
                 if content_type == 'photo':
                     response = InstagramService(username, password).upload_photo(file_path, caption)
                 elif content_type == 'video':

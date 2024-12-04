@@ -1,5 +1,5 @@
-from flask import make_response, jsonify
 import jwt
+
 
 def user_authentication(auth_header, secret_key):
     # Extract the token (bearer scheme expected)

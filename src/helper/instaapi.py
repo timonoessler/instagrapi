@@ -2,6 +2,7 @@ from instagrapi import Client
 from instagrapi.exceptions import LoginRequired
 import os
 
+
 class InstagramService:
     def __init__(self, username: str, password: str):
         self.client = Client()
@@ -43,12 +44,12 @@ class InstagramService:
                 print(f"Unexpected login error: {e}")
 
     def upload_photo(self, photo_path: str, caption: str) -> dict:
-        '''
+        """
         Uploads a photo to Instagram.
         :param photo_path: The full path to the image file.
         :param caption: The photo description.
         :return: Information about the uploaded post.
-        '''
+        """
         if not os.path.exists(photo_path):
             raise FileNotFoundError(f"The image at '{photo_path}' was not found.")
 
@@ -64,18 +65,26 @@ class InstagramService:
 
     def upload_video(self, video_path: str, thumbnail_path: str, caption: str) -> dict:
         """
-        Lädt ein Video auf Instagram hoch.
-        :param video_path: Der vollständige Pfad zur Videodatei.
-        :param thumbnail_path: Der vollständige Pfad zum Vorschaubild (Thumbnail).
-        :param caption: Die Videobeschreibung.
-        :return: Informationen über den hochgeladenen Beitrag.
+        Uploads a video to Instagram.
+        :param video_path: The full path to the video file.
+        :param thumbnail_path: The full path to the thumbnail image.
+        :param caption: The video caption.
+        :return: A dictionary with upload details.
         """
         if not os.path.exists(video_path):
-            raise FileNotFoundError(f"Das Video unter '{video_path}' wurde nicht gefunden.")
+            raise FileNotFoundError(f"The video at '{video_path}' was not found.")
         if not os.path.exists(thumbnail_path):
-            raise FileNotFoundError(f"Das Thumbnail unter '{thumbnail_path}' wurde nicht gefunden.")
+            raise FileNotFoundError(f"The thumbnail at '{thumbnail_path}' was not found.")
 
-        return self.client.video_upload(video_path, caption, thumbnail_path)
+        result = self.client.video_upload(video_path, caption, thumbnail_path)
+
+        # Convert result to a dictionary for JSON response
+        return {
+            "status": "success",
+            "media_id": result.dict().get("id"),
+            "media_url": result.dict().get("media_url"),
+            "caption": caption,
+        }
 
     def upload_reel(self, video_path: str, caption: str) -> dict:
         """
