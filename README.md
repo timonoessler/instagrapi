@@ -1,16 +1,19 @@
 # instagrapi
-Service to upload content to Instagram using User name and password
+Service to upload content to Instagram using username and password
 
-### 1. Venv erstellen
+### 1. Venv erstellen und aktivieren
+```bash
+source venv/bin/activate
+```
 
 Danach requirements.txt installieren. <br>
-`bash    
+```bash    
 pip install -r requirements.txt
-`
+`````
 ### 2. Starte Flask-Server
-`bash
+```bash
 python src/main.py
-`
+```
 
 ### 3. Testen der API
 
