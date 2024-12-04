@@ -4,13 +4,13 @@ Service to upload content to Instagram using User name and password
 ### 1. Venv erstellen
 
 Danach requirements.txt installieren. <br>
-`bash    
+```bash    
 pip install -r requirements.txt
-`
+```
 ### 2. Starte Flask-Server
-`bash
+```bash
 python src/main.py
-`
+```
 
 ### 3. Testen der API
 
